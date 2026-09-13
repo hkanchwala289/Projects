@@ -259,15 +259,15 @@ else:
 - **PostCSS** 8.5.10 – CSS processing
 
 ### Backend
-- **Flask** 3.0.3 – Web framework
-- **Flask-CORS** 4.0.1 – Cross-origin requests
+- **Flask** 3.1.3 – Web framework
+- **Flask-CORS** 6.0.2 – Cross-origin requests
 - **TensorFlow** 2.19.0 – ML framework
-- **Keras** 3.10.0 – Neural network API
-- **Pillow** 10.3.0 – Image processing
-- **Gunicorn** 22.0.0 – WSGI server
+- **Keras** 3.15.1 – Neural network API
+- **Pillow** 12.2.0 – Image processing
+- **Gunicorn** 26.2.0 – WSGI server
 
 ### ML/Data Science
-- **Python** 3.11
+- **Python** 3.11.9
 - **TensorFlow/Keras** – Model training & inference
 - **NumPy** – Numerical computing
 - **Pillow** – Image manipulation
