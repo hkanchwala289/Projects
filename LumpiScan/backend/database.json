@@ -8,27 +8,6 @@
       "created_at": "2026-04-25T09:36:01.505165"
     },
     {
-      "id": "86271b9f-79c9-4c87-a514-92b0615228d6",
-      "phone": "6578096433",
-      "location": "indore",
-      "name": "tripti",
-      "created_at": "2026-04-26T11:02:49.077921"
-    },
-    {
-      "id": "c3447c1a-1a0c-43a4-91ac-c1f6019332b3",
-      "phone": "8818986352",
-      "location": "indore",
-      "name": "Trisha",
-      "created_at": "2026-05-02T09:36:59.265511"
-    },
-    {
-      "id": "85a9447e-42ee-4cf3-9882-b1fc80f320c8",
-      "phone": "9200203742",
-      "location": "stwt",
-      "name": "asa",
-      "created_at": "2026-05-06T07:48:22.722718"
-    },
-    {
       "id": "f1d108bb-2f10-4f35-9267-42d28e05b658",
       "phone": "7773072072",
       "location": "Ujjain",
@@ -67,8 +46,8 @@
       "phone": "7282729011",
       "specialization": "General Veterinary",
       "clinic_address": "14, Saket nagar, Ujjain, M. P.",
-      "lat": null,
-      "lon": null,
+      "lat": 23.17067,
+      "lon": 75.78848,
       "rating": 4.5,
       "reviews": 0,
       "created_at": "2026-05-07T02:45:08.803967"
@@ -79,8 +58,8 @@
       "phone": "7282729228",
       "specialization": "Bovine Medicine",
       "clinic_address": "218, Nanakheda complex, Ujjain, M. P.",
-      "lat": null,
-      "lon": null,
+      "lat": 25.15719,
+      "lon": 75.78888,
       "rating": 4.5,
       "reviews": 0,
       "created_at": "2026-05-07T02:45:47.959768"

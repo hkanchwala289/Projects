@@ -21,10 +21,11 @@ Lumpy Skin Disease is a **highly contagious viral disease** affecting cattle, ca
 LumpiScan addresses these challenges by:
 
 1. **Real-time AI Diagnostics**: Farmers can upload cattle images and receive instant AI-powered disease detection (~95% accuracy)
-2. **Accessibility**: Works on mobile/web browsers without requiring physical veterinary visits
-3. **Professional Network Integration**: Direct connection to registered veterinarians for consultation
-4. **Digital Health Records**: Complete prediction history for tracking animal health over time
-5. **Multi-language Support**: Available in English & Hindi for farmer accessibility
+2. **Smart Image Validation**: A dedicated AI model first verifies the uploaded image actually contains a cow before running disease analysis, preventing false results on irrelevant images
+3. **Accessibility**: Works on mobile/web browsers without requiring physical veterinary visits
+4. **Professional Network Integration**: Direct connection to registered veterinarians for consultation
+5. **Digital Health Records**: Complete prediction history for tracking animal health over time
+6. **Multi-language Support**: Available in English & Hindi for farmer accessibility
 
 ### Impact
 - ✅ **Early Detection**: Identify LSD within minutes instead of days
@@ -32,6 +33,7 @@ LumpiScan addresses these challenges by:
 - ✅ **Cost Reduction**: Prevent economic losses through preventive measures
 - ✅ **Remote Care**: Connect rural farmers with expert veterinarians instantly
 - ✅ **Data-Driven**: Digital records enable better herd management
+- ✅ **Input Validation**: Reject non-cattle images instantly, preventing misleading diagnoses
 
 ---
 
@@ -50,18 +52,20 @@ LumpiScan is built using a **three-tier architecture**:
 ┌────────────────▼────────────────────────────────────────┐
 │            BACKEND (Flask API - Port 5000)              │
 │  • Image Upload & Preprocessing                         │
-│  • ML Model Inference                                   │
+│  • Cow Validation (Stage 1 AI)                         │
+│  • LSD Classification (Stage 2 AI)                     │
 │  • User & Veterinarian Management                       │
 │  • Prediction History Storage                           │
 │  • Veterinarian Search & Geo-location                   │
 └────────────────┬────────────────────────────────────────┘
                  │
-    ┌────────────┼────────────┐
-    │            │            │
-┌───▼───┐   ┌────▼────┐  ┌────▼────┐
-│ML Model│   │Database │  │Uploads  │
-│(Keras) │   │(JSON)   │  │(Images) │
-└────────┘   └─────────┘  └─────────┘
+    ┌────────────┼──────────────────┐
+    │            │                  │
+┌───▼────────────▼──┐  ┌────▼────┐  ┌────▼────┐
+│   ML Models       │  │Database │  │Uploads  │
+│ • cow_or_not.keras│  │(JSON)   │  │(Images) │
+│ • lsd_final.keras │  └─────────┘  └─────────┘
+└───────────────────┘
 ```
 
 ### Component Details
@@ -90,34 +94,131 @@ LumpiScan is built using a **three-tier architecture**:
 - **Port**: 5000 (development) / 10000 (production via Docker)
 
 **Key Endpoints**:
-- `GET /` – Health check
-- `POST /predict` – Image upload and disease prediction
+- `GET /` – Health check (reports both model statuses)
+- `POST /predict` – Image upload → cow validation → disease prediction
 - `POST /register-user` – Register cattle owner
 - `POST /login-user` – Login for cattle owners
 - `POST /register-vet` – Register veterinarian
 - `GET /search-doctors` – Find veterinarians by location
 - `GET /history/<user_id>` – Fetch prediction history
 
-#### ML Model (CNN - MobileNetV2)
-- **Architecture**: MobileNetV2 (Keras)
-- **Input Size**: 224×224 RGB images
-- **Classes**: 2 (Healthy / Lumpy Skin Disease)
-- **Accuracy**: ~95.15%
-- **Inference Time**: <3 seconds
-- **Model File**: `backend/model/lsd_final.keras`
+#### ML Models (CNN - MobileNetV2)
+
+LumpiScan uses a **two-stage AI pipeline**:
+
+**Stage 1 — Cow Validator (`cow_or_not_final.keras`)**
+- Checks whether the uploaded image contains a cow
+- Rejects non-cattle images instantly with a clear error message
+- Accuracy: ~99%
+- Prevents the LSD model from running on irrelevant images (people, objects, other animals)
+
+**Stage 2 — LSD Classifier (`lsd_final.keras`)**
+- Only runs if Stage 1 confirms a cow is present
+- Classifies the cow as Healthy or Lumpy Skin Disease
+- Accuracy: ~95.15%
+- Inference Time: <3 seconds per image
+
+---
+
+## 🧠 ML Model Architecture
+
+### Two-Stage AI Pipeline
+
+```
+User uploads image
+        │
+        ▼
+┌───────────────────────────┐
+│  Stage 1: Cow Validator   │
+│  cow_or_not_final.keras   │
+│  MobileNetV2 + Sigmoid    │
+│  Accuracy: ~99%           │
+└───────────┬───────────────┘
+            │
+     ┌──────┴──────┐
+     │             │
+  Not a cow      Is a cow
+     │             │
+     ▼             ▼
+ 422 Error    ┌───────────────────────────┐
+ "Invalid     │  Stage 2: LSD Classifier  │
+  image"      │  lsd_final.keras          │
+              │  MobileNetV2 + Sigmoid    │
+              │  Accuracy: ~95.15%        │
+              └───────────┬───────────────┘
+                          │
+               ┌──────────┴──────────┐
+               │                     │
+            Healthy            Lumpy Skin
+               │                  Disease
+               ▼                     ▼
+        Monitoring             Isolation &
+        recommendations        Vet referral
+```
+
+### Why MobileNetV2?
+- Lightweight (~3–4MB) – suitable for mobile deployment
+- Fast inference (<3 seconds) – real-time predictions
+- Transfer learning friendly – pretrained on ImageNet weights
+- High accuracy – state-of-the-art for image classification
+
+### Model Training Details
+
+| Property | Cow Validator | LSD Classifier |
+|---|---|---|
+| File | `cow_or_not_final.keras` | `lsd_final.keras` |
+| Task | Binary (cow / not cow) | Binary (healthy / LSD) |
+| Output | Sigmoid (1 neuron) | Sigmoid (1 neuron) |
+| Accuracy | ~99% | ~95.15% |
+| Input Size | 224×224 RGB | 224×224 RGB |
+| Base Model | MobileNetV2 | MobileNetV2 |
+| Optimizer | Adam | Adam |
+| Loss | Binary Crossentropy | Binary Crossentropy |
+
+### Model Files Location
+```
+backend/model/
+├── cow_or_not_final.keras   ← Stage 1: Cow/not-cow validator (99% accuracy)
+└── lsd_final.keras          ← Stage 2: LSD classifier (95% accuracy)
+```
+
+### Model Inference Process (Backend)
+
+```python
+# Stage 1 — Validate image contains a cow
+cow_score = cow_model.predict(preprocessed_image)[0][0]
+if cow_score >= 0.5:          # high score = not a cow (model is inverted)
+    return 422 "Invalid image — not a cow"
+
+# Stage 2 — Classify disease (only runs if cow confirmed)
+lsd_score = model.predict(preprocessed_image)[0][0]
+if lsd_score >= 0.5:
+    label = "Lumpy Skin Disease"
+    confidence = lsd_score
+else:
+    label = "Healthy"
+    confidence = 1.0 - lsd_score
+```
 
 ---
 
 ## 🎨 Features
 
-### 1. **AI Disease Detection**
+### 1. **Smart Image Validation**
+- Dedicated cow-detection AI model runs before any disease analysis
+- Non-cattle images (people, objects, other animals) are rejected immediately
+- Returns a clear `422 Invalid image` response with a user-friendly message
+- Only valid cattle photos proceed to disease classification
+- Prevents misleading or nonsensical diagnoses
+
+### 2. **AI Disease Detection**
 - Upload cattle image (JPG/PNG)
-- Real-time inference using MobileNetV2 CNN
+- Real-time two-stage inference using MobileNetV2 CNN
 - Confidence score display
 - Health recommendations based on prediction
 - Case ID for tracking
 
-### 2. **Veterinary Network**
+### 3. **Veterinary Network**
 - Search vets by name, clinic, or location
 - GPS-based distance calculation (Haversine formula)
 - Vet ratings and reviews
@@ -125,20 +226,20 @@ LumpiScan is built using a **three-tier architecture**:
 - Appointment booking interface
 - Veterinarian registration portal
 
-### 3. **Digital Health Records**
+### 4. **Digital Health Records**
 - Complete prediction history per user
 - Timestamp tracking
 - Confidence metrics
 - Disease status tracking
 - Re-examine previous cases
 
-### 4. **User Management**
+### 5. **User Management**
 - Phone-based registration & authentication
 - Cattle owner profiles
 - Veterinarian profiles
 - Location-based services
 
-### 5. **User Experience**
+### 6. **User Experience**
 - 🌙 Dark mode support
 - 🌍 Multi-language (English/Hindi)
 - 📱 Fully responsive design
@@ -160,8 +261,8 @@ LumpiScan is built using a **three-tier architecture**:
 ### Backend
 - **Flask** 3.0.3 – Web framework
 - **Flask-CORS** 4.0.1 – Cross-origin requests
-- **TensorFlow** 2.21.0 – ML framework
-- **Keras** 3.14.0 – Neural network API
+- **TensorFlow** 2.19.0 – ML framework
+- **Keras** 3.10.0 – Neural network API
 - **Pillow** 10.3.0 – Image processing
 - **Gunicorn** 22.0.0 – WSGI server
 
@@ -175,77 +276,6 @@ LumpiScan is built using a **three-tier architecture**:
 - **Docker** – Containerization
 - **Docker Compose** (optional) – Multi-container orchestration
 - **Python venv** – Virtual environment
-
----
-
-## 🧠 ML Model Architecture
-
-### MobileNetV2-Based CNN
-
-**Why MobileNetV2?**
-- Lightweight (~3-4MB) – suitable for mobile deployment
-- Fast inference (<3 seconds) – real-time predictions
-- Transfer learning friendly – trained on ImageNet weights
-- High accuracy – state-of-the-art for image classification
-
-### Model Pipeline
-
-```
-Input Image (JPG/PNG)
-     ↓
-Resize to 224×224 (RGB)
-     ↓
-Normalize using MobileNetV2 preprocess_input
-     ↓
-MobileNetV2 Base (pretrained ImageNet weights)
-     ↓
-Custom Classification Head (2 classes)
-     ↓
-Softmax Output: [P(Healthy), P(LSD)]
-     ↓
-Argmax → Prediction Label
-```
-
-### Model Training Details
-- **Dataset**: Cattle LSD images (binary classification)
-- **Preprocessing**: 224×224 normalization, data augmentation
-- **Optimizer**: Adam
-- **Loss Function**: Categorical Crossentropy
-- **Metrics**: Accuracy
-- **Model Format**: Keras (.keras) with fallback to legacy format
-
-### Model Files Location
-```
-backend/model/
-├── lsd_final.keras          ← Production model (used by API)
-├── lsd_model.keras          ← Alternative model
-└── lsd_model_tf213.h5       ← TensorFlow 2.13 format
-```
-
-### Model Inference Process (Backend)
-
-```python
-# Load model at startup
-model = load_model("backend/model/lsd_final.keras", compile=False)
-
-# Preprocess image
-image_bytes → PIL.Image → Resize(224,224) → Normalize
-
-# Inference
-predictions = model.predict(preprocessed_image)
-confidence = max(predictions[0])
-label = CLASS_NAMES[argmax(predictions[0])]
-
-# Generate Recommendations
-if label == "Lumpy Skin Disease":
-    recommendations = [
-        "Immediately isolate the animal from the herd.",
-        "Contact a registered veterinarian as soon as possible.",
-        "Administer prescribed anti-inflammatory medication.",
-        "Apply insect/vector control measures in the barn.",
-        "Report to local livestock disease authority."
-    ]
-```
 
 ---
 
@@ -281,9 +311,11 @@ source venv/bin/activate
 # Install dependencies
 pip install -r requirements.txt
 
-# Verify model file exists
-# Ensure backend/model/lsd_final.keras is present
+# Verify both model files exist
 ls model/
+# Expected output:
+#   cow_or_not_final.keras
+#   lsd_final.keras
 
 # Run Flask development server
 python app.py
@@ -307,7 +339,6 @@ npm run dev
 
 - **Frontend**: http://localhost:3000
 - **Backend API**: http://localhost:5000
-- **Health Check**: http://localhost:5000/
 
 ---
 
@@ -324,8 +355,11 @@ GET /
 {
   "status": "CattleCare API running",
   "model_loaded": true,
+  "model_error": null,
+  "cow_model_loaded": true,
+  "cow_model_error": null,
   "model_path": "/path/to/lsd_final.keras",
-  "model_error": null
+  "cow_model_path": "/path/to/cow_or_not_final.keras"
 }
 ```
 
@@ -342,7 +376,16 @@ Body:
 - user_id: <optional_user_id>
 ```
 
-**Response** (200 OK):
+**Stage 1 fails — not a cow** (422 Unprocessable Entity):
+```json
+{
+  "error": "Invalid image",
+  "message": "The uploaded image does not appear to contain a cow. Please upload a clear photo of the animal.",
+  "is_valid_cow": false
+}
+```
+
+**Stage 2 success — cow detected and classified** (200 OK):
 ```json
 {
   "prediction": "Healthy" | "Lumpy Skin Disease",
@@ -463,7 +506,7 @@ GET /search-doctors?location=Bangalore&lat=12.9716&lon=77.5946&radius_km=50
       "distance_km": 5.2
     }
   ],
-  "count": 1
+  "total": 1
 }
 ```
 
@@ -507,12 +550,13 @@ GET /history/<user_id>
 2. **Upload Cattle Image**
    - Click "Start Detection"
    - Drag & drop image or select from device
+   - **Important**: Upload a clear photo of your cow — other images will be rejected
    - Wait for AI analysis (~3 seconds)
 
 3. **View Results**
-   - See disease prediction with confidence score
-   - Read health recommendations
-   - Option to contact veterinarian
+   - If image is not a cow: receive an "Invalid image" message prompting a correct upload
+   - If image is a cow: see disease prediction with confidence score and health recommendations
+   - Option to contact veterinarian if LSD is detected
 
 4. **Find Veterinarian**
    - Go to "Veterinary" section
@@ -547,34 +591,33 @@ GET /history/<user_id>
 ```
 LumpiScan/
 ├── backend/
-│   ├── app.py                    ← Main Flask application
-│   ├── convert_model.py          ← Model format conversion utility
-│   ├── requirements.txt          ← Python dependencies
-│   ├── Dockerfile               ← Docker configuration
+│   ├── app.py                        ← Main Flask application
+│   ├── fix_models.py                 ← Model compatibility fix utility
+│   ├── requirements.txt              ← Python dependencies
+│   ├── Dockerfile                    ← Docker configuration
 │   ├── model/
-│   │   ├── lsd_final.keras      ← Production model
-│   │   ├── lsd_model.keras
-│   │   └── lsd_model_tf213.h5
-│   ├── uploads/                 ← Uploaded images storage
-│   └── database.json            ← Persistent data store
+│   │   ├── cow_or_not_final.keras   ← Stage 1: Cow validator (99% accuracy)
+│   │   └── lsd_final.keras          ← Stage 2: LSD classifier (95% accuracy)
+│   ├── uploads/                      ← Uploaded images storage
+│   └── database.json                 ← Persistent data store
 │
 ├── frontend/
 │   ├── src/
-│   │   ├── App.jsx              ← Main React component
-│   │   ├── main.jsx             ← React entry point
-│   │   ├── index.css            ← Global styles
-│   │   ├── animations.css       ← Custom animations
+│   │   ├── App.jsx                  ← Main React component
+│   │   ├── main.jsx                 ← React entry point
+│   │   ├── index.css                ← Global styles
+│   │   ├── animations.css           ← Custom animations
 │   │   ├── components/
 │   │   │   ├── Navbar.jsx
 │   │   │   └── LanguageSwitcher.jsx
 │   │   ├── context/
-│   │   │   ├── AuthContext.jsx  ← User authentication
+│   │   │   ├── AuthContext.jsx      ← User authentication
 │   │   │   ├── LanguageContext.jsx
-│   │   │   └── ThemeContext.jsx ← Dark mode
+│   │   │   └── ThemeContext.jsx     ← Dark mode
 │   │   ├── hooks/
 │   │   │   └── useScrollReveal.jsx
 │   │   ├── i18n/
-│   │   │   └── translations.js  ← Multi-language strings
+│   │   │   └── translations.js      ← Multi-language strings
 │   │   └── pages/
 │   │       ├── Home.jsx
 │   │       ├── Detection.jsx
@@ -585,14 +628,14 @@ LumpiScan/
 │   ├── vite.config.js
 │   ├── tailwind.config.js
 │   ├── postcss.config.js
-│   ├── vercel.json             ← Vercel deployment config
+│   ├── vercel.json                  ← Vercel deployment config
 │   └── index.html
 │
 ├── ml_model/
-│   ├── train_model.py          ← Model training script
-│   └── lsd_model_tf213.h5      ← Original model format
+│   ├── train_model.py               ← LSD model training script
+│   └── train_cow_validator.py       ← Cow validator training script
 │
-└── README.md                   ← This file
+└── README.md                        ← This file
 ```
 
 ### Running Development Servers
@@ -616,7 +659,6 @@ npm run dev
 ```bash
 cd backend
 pip install -r requirements.txt
-# Use Gunicorn
 gunicorn --bind 0.0.0.0:10000 app:app
 ```
 
@@ -630,15 +672,17 @@ npm run build
 ### Debugging
 
 **Backend Debugging**:
-- Check Flask logs in terminal
-- Verify model file exists at `backend/model/lsd_final.keras`
-- Test endpoints using curl or Postman
-- Check `database.json` for stored data
+- Check Flask logs in terminal — startup logs report both model load statuses
+- Verify both model files exist at `backend/model/`
+- Hit `GET /` to confirm `cow_model_loaded: true` and `model_loaded: true`
+- Test with Postman: send a non-cow image and verify 422 response
+- Test with a cow image and verify 200 response with prediction
+- Check `database.json` for stored predictions
 
 **Frontend Debugging**:
 - Open browser DevTools (F12)
 - Check Console tab for errors
-- Network tab to inspect API calls
+- Network tab to inspect API calls — look for 422 vs 200 on `/predict`
 - Check Vite dev server logs
 
 ---
@@ -677,7 +721,7 @@ services:
       - ./backend/database.json:/app/database.json
     environment:
       - FLASK_ENV=production
-  
+
   frontend:
     image: node:16-alpine
     working_dir: /app
@@ -712,6 +756,7 @@ docker-compose up
 3. Set build command: `pip install -r requirements.txt`
 4. Set start command: `gunicorn --bind 0.0.0.0:10000 app:app`
 5. Add volume for uploads and database persistence
+6. Ensure both `.keras` model files are included in the repository or mounted as volumes
 
 ### Environment Variables
 
@@ -777,14 +822,19 @@ DEBUG=False
 ### Image Processing
 - **Input Size**: 224×224 pixels
 - **Color Space**: RGB
-- **Format Supported**: JPG, PNG
+- **Formats Supported**: JPG, PNG
 - **Max File Size**: Recommended <5MB
+- **Preprocessing**: MobileNetV2 `preprocess_input` normalization
 
 ### Model Configuration
-- **Model Path**: `backend/model/lsd_final.keras`
-- **Classes**: ["Healthy", "Lumpy Skin Disease"]
-- **Framework**: TensorFlow/Keras 2.21.0
-- **Fallback**: Legacy Keras format support
+
+| Setting | Value |
+|---|---|
+| Cow Validator Path | `backend/model/cow_or_not_final.keras` |
+| LSD Classifier Path | `backend/model/lsd_final.keras` |
+| Classes (LSD model) | `["Healthy", "Lumpy Skin Disease"]` |
+| Decision Threshold | `0.5` (sigmoid output) |
+| Image Size | `224 × 224` |
 
 ### Geo-Location
 - **Distance Calculation**: Haversine formula
@@ -873,8 +923,8 @@ This project is licensed under the MIT License - see LICENSE file for details.
 
 ---
 
-**Last Updated**: May 6, 2024  
-**Version**: 1.0.0  
+**Last Updated**: September 2026
+**Version**: 2.0.0
 **Status**: Production Ready ✅
 
 ---
@@ -888,14 +938,21 @@ cd backend && source venv/bin/activate && python app.py
 # Frontend
 cd frontend && npm run dev
 
+# Verify both models loaded
+curl http://localhost:5000/
+# Check: "cow_model_loaded": true AND "model_loaded": true
+
+# Test cow validation (should return 422)
+curl -X POST http://localhost:5000/predict -F "image=@non_cow_image.jpg"
+
+# Test full pipeline (should return prediction)
+curl -X POST http://localhost:5000/predict -F "image=@cow_image.jpg"
+
 # Production Build
 cd frontend && npm run build
 
 # Docker
 docker build -t lumpiscan-backend . && docker run -p 10000:10000 lumpiscan-backend
-
-# Test API
-curl http://localhost:5000/
 ```
 
 ---
