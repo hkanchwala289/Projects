@@ -16,8 +16,6 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS
 import numpy as np
 import tensorflow as tf
-from tensorflow.keras.models import load_model
-from tensorflow.keras.applications.mobilenet_v2 import preprocess_input
 from PIL import Image
 import io
 import math
@@ -69,7 +67,7 @@ def load_model_once():
         return
     try:
         # compile=False avoids optimizer deserialization issues across TF versions
-        model = load_model(resolved, compile=False)
+        model = tf.keras.models.load_model(resolved, compile=False)
         model.compile(optimizer="adam", loss="categorical_crossentropy", metrics=["accuracy"])
         print("[MODEL] Loaded successfully")
     except Exception as exc:
@@ -93,7 +91,7 @@ def load_model_once():
         print(f"[COW MODEL] WARNING  {cow_model_error}")
     else:
         try:
-            cow_model = load_model(cow_resolved, compile=False)
+            cow_model = tf.keras.models.load_model(cow_resolved, compile=False)
             cow_model.compile(optimizer="adam", loss="binary_crossentropy", metrics=["accuracy"])
             print("[COW MODEL] Loaded successfully")
         except Exception as exc:
@@ -116,7 +114,7 @@ def preprocess_image(image_bytes):
     img = Image.open(io.BytesIO(image_bytes)).convert("RGB")
     img = img.resize((IMG_SIZE, IMG_SIZE))
     arr = np.array(img, dtype=np.float32)
-    arr = preprocess_input(arr)
+    arr = tf.keras.applications.mobilenet_v2.preprocess_input(arr)
     return np.expand_dims(arr, axis=0)
 
 
@@ -125,7 +123,7 @@ def preprocess_image(image_bytes):
     img = Image.open(io.BytesIO(image_bytes)).convert("RGB")
     img = img.resize((IMG_SIZE, IMG_SIZE))
     arr = np.array(img, dtype=np.float32)
-    arr = preprocess_input(arr)
+    arr = tf.keras.applications.mobilenet_v2.preprocess_input(arr)
     return np.expand_dims(arr, axis=0)
 
 
