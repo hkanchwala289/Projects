@@ -824,6 +824,78 @@
       "confidence": 93.7,
       "is_infected": true,
       "timestamp": "2026-05-07T05:00:41.085062"
+    },
+    {
+      "id": "bb01a7b4-fe51-4bb0-987d-5fa502a52da5",
+      "user_id": "anonymous",
+      "filename": "0f61218b7f8e4c2099c134f014ae8aef.jpg",
+      "label": "Lumpy Skin Disease",
+      "confidence": 94.0,
+      "is_infected": true,
+      "timestamp": "2026-09-13T06:50:09.220967"
+    },
+    {
+      "id": "02675b8c-b5e2-4349-b609-10309895fcbc",
+      "user_id": "anonymous",
+      "filename": "893ffa6fac9648e6a9f2a36f585234bc.jpg",
+      "label": "Lumpy Skin Disease",
+      "confidence": 94.0,
+      "is_infected": true,
+      "timestamp": "2026-09-13T06:52:04.675210"
+    },
+    {
+      "id": "d95d0a7b-106e-462c-a96a-34fa9e60a10d",
+      "user_id": "anonymous",
+      "filename": "63b15cb9868b483b9e2148421025e733.jpg",
+      "label": "Healthy",
+      "confidence": 99.8,
+      "is_infected": false,
+      "timestamp": "2026-09-13T07:40:53.879908"
+    },
+    {
+      "id": "415ea68b-ef24-4284-83a5-d4bf183da76e",
+      "user_id": "anonymous",
+      "filename": "9a60a992d5a94764b285a87121cf7a80.jpg",
+      "label": "Healthy",
+      "confidence": 98.46,
+      "is_infected": false,
+      "timestamp": "2026-09-13T07:41:07.710753"
+    },
+    {
+      "id": "9a506157-19fe-43fd-92bf-5ef2e9a0b6c6",
+      "user_id": "anonymous",
+      "filename": "55137544d47140b59f4957ce335fc3de.jpg",
+      "label": "Healthy",
+      "confidence": 100.0,
+      "is_infected": false,
+      "timestamp": "2026-09-13T07:42:12.055183"
+    },
+    {
+      "id": "17bf91c8-1aa2-476b-a0fe-968c64006217",
+      "user_id": "anonymous",
+      "filename": "9f186c60ee2544e49d93f04a97188be9.jpg",
+      "label": "Healthy",
+      "confidence": 73.84,
+      "is_infected": false,
+      "timestamp": "2026-09-13T07:43:39.490320"
+    },
+    {
+      "id": "b40fe6db-0f4a-47e2-b5e0-bfa367c2e73f",
+      "user_id": "anonymous",
+      "filename": "a889a2b1737e4949b9c459ccd4b799c9.jpg",
+      "label": "Healthy",
+      "confidence": 90.96,
+      "is_infected": false,
+      "timestamp": "2026-09-13T07:45:15.182732"
+    },
+    {
+      "id": "fa62b3ae-4e70-4fa6-a117-dc44b456afa1",
+      "user_id": "anonymous",
+      "filename": "3fb32eb359ed4668a4e01b47fab7010c.jpg",
+      "label": "Lumpy Skin Disease",
+      "confidence": 95.52,
+      "is_infected": true,
+      "timestamp": "2026-09-13T07:45:58.791539"
     }
   ]
 }

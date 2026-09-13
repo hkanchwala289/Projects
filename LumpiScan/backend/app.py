@@ -15,19 +15,19 @@ from datetime import datetime
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 import numpy as np
+import keras
 import tensorflow as tf
 from PIL import Image
 import io
 import math
 
-os.environ["TF_USE_LEGACY_KERAS"] = "1"
 app = Flask(__name__)
 CORS(app)  # Allow React frontend on different port
 
 # ─── CONFIG ───────────────────────────────────────────────────────────────────
 BASE_DIR    = os.path.dirname(os.path.abspath(__file__))         # .../backend/
-MODEL_PATH  = os.path.join(BASE_DIR, "model", "lsd_final.keras")
-COW_MODEL_PATH  = os.path.join(BASE_DIR, "model", "cow_or_not_final.keras")  #    # backend/model/lsd_final.keras
+MODEL_PATH  = os.path.join(BASE_DIR, "model", "lsd_final_fixed.keras")
+COW_MODEL_PATH  = os.path.join(BASE_DIR, "model", "cow_or_not_final_fixed.keras")  #    # backend/model/lsd_final.keras
 UPLOAD_DIR  = os.path.join(BASE_DIR, "uploads")
 DB_FILE     = os.path.join(BASE_DIR, "database.json")
 IMG_SIZE    = 224
@@ -58,53 +58,20 @@ cow_model_error = None
 
 def load_model_once():
     global model, model_error, cow_model, cow_model_error
-    resolved = os.path.abspath(MODEL_PATH)
-    print(f"[MODEL] Resolved path : {resolved}")
-    print(f"[MODEL] File exists   : {os.path.exists(resolved)}")
-    if not os.path.exists(resolved):
-        model_error = f"Model file not found: {resolved}"
-        print(f"[MODEL] WARNING  {model_error}")
-        return
-    try:
-        # compile=False avoids optimizer deserialization issues across TF versions
-        model = tf.keras.models.load_model(resolved, compile=False)
-        model.compile(optimizer="adam", loss="categorical_crossentropy", metrics=["accuracy"])
-        print("[MODEL] Loaded successfully")
-    except Exception as exc:
-        model_error = str(exc)
-        print(f"[MODEL] ERROR Failed to load - {model_error}")
-        # Fallback: try legacy Keras loader
-        try:
-            import keras
-            model = keras.models.load_model(resolved, compile=False)
-            print("[MODEL] Loaded via legacy Keras fallback")
-            model_error = None
-        except Exception as exc2:
-            model_error = f"Both loaders failed. Primary: {exc} | Fallback: {exc2}"
-            print(f"[MODEL] ERROR Fallback also failed - {exc2}")
 
-    cow_resolved = os.path.abspath(COW_MODEL_PATH)
-    print(f"[COW MODEL] Path   : {cow_resolved}")
-    print(f"[COW MODEL] Exists : {os.path.exists(cow_resolved)}")
-    if not os.path.exists(cow_resolved):
-        cow_model_error = f"Model file not found: {cow_resolved}"
-        print(f"[COW MODEL] WARNING  {cow_model_error}")
-    else:
-        try:
-            cow_model = tf.keras.models.load_model(cow_resolved, compile=False)
-            cow_model.compile(optimizer="adam", loss="binary_crossentropy", metrics=["accuracy"])
-            print("[COW MODEL] Loaded successfully")
-        except Exception as exc:
-            cow_model_error = str(exc)
-            print(f"[COW MODEL] ERROR {cow_model_error}")
-            try:
-                import keras
-                cow_model = keras.models.load_model(cow_resolved, compile=False)
-                cow_model_error = None
-                print("[COW MODEL] Loaded via legacy Keras fallback")
-            except Exception as exc2:
-                cow_model_error = f"Both loaders failed. Primary: {exc} | Fallback: {exc2}"
-                print(f"[COW MODEL] Fallback also failed: {exc2}")
+    try:
+        model = keras.models.load_model(MODEL_PATH, compile=False)
+        print("[MODEL] Loaded successfully")
+    except Exception as e:
+        model_error = str(e)
+        print(f"[MODEL] ERROR {e}")
+
+    try:
+        cow_model = keras.models.load_model(COW_MODEL_PATH, compile=False)
+        print("[COW MODEL] Loaded successfully")
+    except Exception as e:
+        cow_model_error = str(e)
+        print(f"[COW MODEL] ERROR {e}")
 
 load_model_once()   # runs once at import / startup
 # ──────────────────────────────────────────────────────────────────────────────
@@ -114,18 +81,8 @@ def preprocess_image(image_bytes):
     img = Image.open(io.BytesIO(image_bytes)).convert("RGB")
     img = img.resize((IMG_SIZE, IMG_SIZE))
     arr = np.array(img, dtype=np.float32)
-    arr = tf.keras.applications.mobilenet_v2.preprocess_input(arr)
+    arr = keras.applications.mobilenet_v2.preprocess_input(arr)
     return np.expand_dims(arr, axis=0)
-
-
-def preprocess_image(image_bytes):
-    """Preprocess image bytes for MobileNetV2 inference."""
-    img = Image.open(io.BytesIO(image_bytes)).convert("RGB")
-    img = img.resize((IMG_SIZE, IMG_SIZE))
-    arr = np.array(img, dtype=np.float32)
-    arr = tf.keras.applications.mobilenet_v2.preprocess_input(arr)
-    return np.expand_dims(arr, axis=0)
-
 
 def haversine(lat1, lon1, lat2, lon2):
     """Calculate distance (km) between two GPS coordinates."""
