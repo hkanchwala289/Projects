@@ -1,0 +1,829 @@
+{
+  "users": [
+    {
+      "id": "f8a00e01-58e6-4673-86dc-ea1f7ec0f48e",
+      "phone": "9302494765",
+      "location": "Indore",
+      "name": "Tripti",
+      "created_at": "2026-04-25T09:36:01.505165"
+    },
+    {
+      "id": "86271b9f-79c9-4c87-a514-92b0615228d6",
+      "phone": "6578096433",
+      "location": "indore",
+      "name": "tripti",
+      "created_at": "2026-04-26T11:02:49.077921"
+    },
+    {
+      "id": "c3447c1a-1a0c-43a4-91ac-c1f6019332b3",
+      "phone": "8818986352",
+      "location": "indore",
+      "name": "Trisha",
+      "created_at": "2026-05-02T09:36:59.265511"
+    },
+    {
+      "id": "85a9447e-42ee-4cf3-9882-b1fc80f320c8",
+      "phone": "9200203742",
+      "location": "stwt",
+      "name": "asa",
+      "created_at": "2026-05-06T07:48:22.722718"
+    },
+    {
+      "id": "f1d108bb-2f10-4f35-9267-42d28e05b658",
+      "phone": "7773072072",
+      "location": "Ujjain",
+      "name": "Husain Kanchwala",
+      "created_at": "2026-05-06T17:59:00.106332"
+    }
+  ],
+  "vets": [
+    {
+      "id": "b3b906ae-c87e-4653-b925-161524926666",
+      "name": "tripti",
+      "phone": "9302494765",
+      "specialization": "Animal Surgery",
+      "clinic_address": "indore",
+      "lat": 32.0,
+      "lon": 76.0,
+      "rating": 4.5,
+      "reviews": 0,
+      "created_at": "2026-04-25T09:34:20.804036"
+    },
+    {
+      "id": "2b2e0b67-08bf-4fa0-b1a2-1bbdf7093493",
+      "name": "Tripti Kharole",
+      "phone": "9302494765",
+      "specialization": "Livestock Health",
+      "clinic_address": "Jamtha,Nagpur",
+      "lat": 21.01721,
+      "lon": 79.02996,
+      "rating": 4.5,
+      "reviews": 0,
+      "created_at": "2026-04-25T09:56:07.537329"
+    },
+    {
+      "id": "d3ff6fd1-e15f-4d93-9259-2bd1c5a1cf09",
+      "name": "Dr. Mukesh Jain",
+      "phone": "7282729011",
+      "specialization": "General Veterinary",
+      "clinic_address": "14, Saket nagar, Ujjain, M. P.",
+      "lat": null,
+      "lon": null,
+      "rating": 4.5,
+      "reviews": 0,
+      "created_at": "2026-05-07T02:45:08.803967"
+    },
+    {
+      "id": "d028cd1d-c9cf-4ef2-ae0f-48ea21a2c63f",
+      "name": "Dr. Apeksha Jain",
+      "phone": "7282729228",
+      "specialization": "Bovine Medicine",
+      "clinic_address": "218, Nanakheda complex, Ujjain, M. P.",
+      "lat": null,
+      "lon": null,
+      "rating": 4.5,
+      "reviews": 0,
+      "created_at": "2026-05-07T02:45:47.959768"
+    }
+  ],
+  "predictions": [
+    {
+      "id": "485e090f-534f-4d62-ad4b-c676448a88ca",
+      "user_id": "anonymous",
+      "filename": "d01478a6aa7d482eb49e9acba581b2f1.jpg",
+      "label": "Lumpy Skin Disease",
+      "confidence": 73.56,
+      "is_infected": true,
+      "timestamp": "2026-04-25T09:33:00.753376"
+    },
+    {
+      "id": "27a23c66-6eab-4b2b-975c-679f14bc9967",
+      "user_id": "anonymous",
+      "filename": "ed2c91497a264bf7a7f8866bbffbcf85.jpg",
+      "label": "Lumpy Skin Disease",
+      "confidence": 73.56,
+      "is_infected": true,
+      "timestamp": "2026-04-25T09:34:40.435299"
+    },
+    {
+      "id": "9f8c4a7c-0d43-4068-bd89-aa915694f047",
+      "user_id": "f8a00e01-58e6-4673-86dc-ea1f7ec0f48e",
+      "filename": "757e227d87f247f789da2d09c8a76a2b.jpg",
+      "label": "Lumpy Skin Disease",
+      "confidence": 66.83,
+      "is_infected": true,
+      "timestamp": "2026-04-25T09:37:38.982620"
+    },
+    {
+      "id": "1c51b690-1615-4e34-a8dd-53c293b8a144",
+      "user_id": "f8a00e01-58e6-4673-86dc-ea1f7ec0f48e",
+      "filename": "eaf3571bde6f444ea4151520a67a4551.jpg",
+      "label": "Lumpy Skin Disease",
+      "confidence": 73.56,
+      "is_infected": true,
+      "timestamp": "2026-04-26T09:34:26.886936"
+    },
+    {
+      "id": "115ea15f-c7e5-4892-ada9-6e77de458f52",
+      "user_id": "anonymous",
+      "filename": "2474c15ec6d044de947e119831a872fd.jpg",
+      "label": "Healthy",
+      "confidence": 80.16,
+      "is_infected": false,
+      "timestamp": "2026-04-26T10:43:56.832569"
+    },
+    {
+      "id": "08249fb0-2fa8-4b31-a65f-84cb56f60ac9",
+      "user_id": "anonymous",
+      "filename": "84577bd8c5504d31ba1522e7754d3abd.jpg",
+      "label": "Lumpy Skin Disease",
+      "confidence": 73.56,
+      "is_infected": true,
+      "timestamp": "2026-04-26T11:02:22.543922"
+    },
+    {
+      "id": "2863217e-98a1-4dfb-88d6-f50e4ffa5340",
+      "user_id": "86271b9f-79c9-4c87-a514-92b0615228d6",
+      "filename": "b704bb0cf4f6411c8127d8141676f933.jpg",
+      "label": "Lumpy Skin Disease",
+      "confidence": 66.83,
+      "is_infected": true,
+      "timestamp": "2026-04-26T11:03:06.512712"
+    },
+    {
+      "id": "fd758a47-34e4-44a2-a03f-4305448433c3",
+      "user_id": "86271b9f-79c9-4c87-a514-92b0615228d6",
+      "filename": "769c6e97ea3646819fc466bb4ae96c68.jpg",
+      "label": "Lumpy Skin Disease",
+      "confidence": 66.83,
+      "is_infected": true,
+      "timestamp": "2026-04-27T09:46:05.388772"
+    },
+    {
+      "id": "1b7f2082-ba09-4722-9131-c3f42e68ed67",
+      "user_id": "86271b9f-79c9-4c87-a514-92b0615228d6",
+      "filename": "7018cb7971cf4bd39cca88466fa708c7.jpg",
+      "label": "Lumpy Skin Disease",
+      "confidence": 73.56,
+      "is_infected": true,
+      "timestamp": "2026-04-27T09:57:05.369182"
+    },
+    {
+      "id": "64b15b32-a163-48c9-b162-9f9d2e27bb9a",
+      "user_id": "anonymous",
+      "filename": "f7151098877f47c398ba23220804a6ed.jpg",
+      "label": "Lumpy Skin Disease",
+      "confidence": 73.56,
+      "is_infected": true,
+      "timestamp": "2026-05-02T09:27:16.128558"
+    },
+    {
+      "id": "46278884-cf2d-46da-a19b-20429df5b0e1",
+      "user_id": "c3447c1a-1a0c-43a4-91ac-c1f6019332b3",
+      "filename": "63fadaabc1cd4991baf51f6cf7a90b05.jpg",
+      "label": "Lumpy Skin Disease",
+      "confidence": 66.83,
+      "is_infected": true,
+      "timestamp": "2026-05-02T09:37:17.108170"
+    },
+    {
+      "id": "0405817e-7f44-4e1f-bec0-6a837bcb7c72",
+      "user_id": "c3447c1a-1a0c-43a4-91ac-c1f6019332b3",
+      "filename": "ae8e06bf31cc4220a35f4a1d227afecc.jpg",
+      "label": "Lumpy Skin Disease",
+      "confidence": 73.56,
+      "is_infected": true,
+      "timestamp": "2026-05-02T11:46:46.876354"
+    },
+    {
+      "id": "281fddd7-6ab2-4735-b190-f427ce539505",
+      "user_id": "c3447c1a-1a0c-43a4-91ac-c1f6019332b3",
+      "filename": "932d3425c8dd43b780604e0032c0114b.jpg",
+      "label": "Lumpy Skin Disease",
+      "confidence": 73.56,
+      "is_infected": true,
+      "timestamp": "2026-05-02T13:05:10.240926"
+    },
+    {
+      "id": "1fa2b0c5-b7cb-4045-a9b0-da794f00f476",
+      "user_id": "bb1b20e8-2c7d-4dc4-a1c2-2981011f9d28",
+      "filename": "48d3719562024a0b95738d70f0635c94.jpg",
+      "label": "Lumpy Skin Disease",
+      "confidence": 94.0,
+      "is_infected": true,
+      "timestamp": "2026-05-06T07:47:36.140704"
+    },
+    {
+      "id": "c48345e4-928f-4644-ac1b-a221fee06e06",
+      "user_id": "85a9447e-42ee-4cf3-9882-b1fc80f320c8",
+      "filename": "b2496a4c3f7f4e2c902f80ba0284ea2e.jpg",
+      "label": "Lumpy Skin Disease",
+      "confidence": 52.39,
+      "is_infected": true,
+      "timestamp": "2026-05-06T07:50:20.528723"
+    },
+    {
+      "id": "eb96f6fc-459f-49cc-a1c9-bb2b01f6d84f",
+      "user_id": "85a9447e-42ee-4cf3-9882-b1fc80f320c8",
+      "filename": "62fcf99b379343238137f51f0bb696ca.jpg",
+      "label": "Lumpy Skin Disease",
+      "confidence": 66.83,
+      "is_infected": true,
+      "timestamp": "2026-05-06T07:50:50.709890"
+    },
+    {
+      "id": "c91002a1-6619-4c3e-9a50-3d163aeaf6c1",
+      "user_id": "85a9447e-42ee-4cf3-9882-b1fc80f320c8",
+      "filename": "06324f19f8594e96b36b33e48dd0c2e9.jpg",
+      "label": "Healthy",
+      "confidence": 86.37,
+      "is_infected": false,
+      "timestamp": "2026-05-06T07:51:12.496598"
+    },
+    {
+      "id": "ef697bdd-dd5b-48a2-8ad7-e0bb8bd6eefe",
+      "user_id": "85a9447e-42ee-4cf3-9882-b1fc80f320c8",
+      "filename": "6968fd67dc4c4ca8b639c045696ac913.jpg",
+      "label": "Healthy",
+      "confidence": 80.16,
+      "is_infected": false,
+      "timestamp": "2026-05-06T07:51:22.943694"
+    },
+    {
+      "id": "626cac92-fc5f-4672-948d-cc4d4dff79d9",
+      "user_id": "85a9447e-42ee-4cf3-9882-b1fc80f320c8",
+      "filename": "0410e6b0fbca47eabe3dcd83956e236c.jpg",
+      "label": "Lumpy Skin Disease",
+      "confidence": 52.39,
+      "is_infected": true,
+      "timestamp": "2026-05-06T08:01:55.233270"
+    },
+    {
+      "id": "d24d1d5f-4869-45f7-9f56-4dda731a2de6",
+      "user_id": "anonymous",
+      "filename": "85586cbdbfcd49fd985ad3339af6d5ad.jpg",
+      "label": "Healthy",
+      "confidence": 7.52,
+      "is_infected": false,
+      "timestamp": "2026-05-06T14:50:00.648083"
+    },
+    {
+      "id": "be4b98ac-2e40-45a9-82cb-486c1e4a4df7",
+      "user_id": "anonymous",
+      "filename": "59316c2fbb194d95a4246ebdb046baa7.jpg",
+      "label": "Healthy",
+      "confidence": 0.3,
+      "is_infected": false,
+      "timestamp": "2026-05-06T14:50:13.598084"
+    },
+    {
+      "id": "d3332f2e-aaa3-42f8-b87d-339553fdf33c",
+      "user_id": "anonymous",
+      "filename": "0832080db7d441cbb10437fd269f5436.jpg",
+      "label": "Healthy",
+      "confidence": 0.0,
+      "is_infected": false,
+      "timestamp": "2026-05-06T14:50:27.499743"
+    },
+    {
+      "id": "b3344f22-3dcb-491e-9fce-6968fbffb398",
+      "user_id": "anonymous",
+      "filename": "95a05dd00b4a445cbd2a2713fe796871.jpg",
+      "label": "Healthy",
+      "confidence": 0.03,
+      "is_infected": false,
+      "timestamp": "2026-05-06T14:50:44.739735"
+    },
+    {
+      "id": "edaa3df5-9b8a-44a4-b462-047f479b6568",
+      "user_id": "anonymous",
+      "filename": "7239c3e27ccc4befb7e5d4a927ae6de1.jpg",
+      "label": "Healthy",
+      "confidence": 0.03,
+      "is_infected": false,
+      "timestamp": "2026-05-06T14:51:48.510022"
+    },
+    {
+      "id": "5a38fc09-3b74-454a-a51f-13067002510e",
+      "user_id": "anonymous",
+      "filename": "414935de2ed64097b18c16d755614cf1.jpg",
+      "label": "Healthy",
+      "confidence": 0.0,
+      "is_infected": false,
+      "timestamp": "2026-05-06T14:51:59.291072"
+    },
+    {
+      "id": "74c02dcc-d47f-461d-ad26-3fdb8eb7deb2",
+      "user_id": "anonymous",
+      "filename": "6f020d99bf0b43f684c1300e62e5f9c4.jpg",
+      "label": "Healthy",
+      "confidence": 94.1,
+      "is_infected": false,
+      "timestamp": "2026-05-06T14:52:27.723737"
+    },
+    {
+      "id": "bf4d0f96-f2bd-4d5c-90f5-bcb7bd7c2fbd",
+      "user_id": "anonymous",
+      "filename": "aaec37c50c4546b8a2bdbbcfce922a3b.jpg",
+      "label": "Healthy",
+      "confidence": 98.26,
+      "is_infected": false,
+      "timestamp": "2026-05-06T14:52:41.281716"
+    },
+    {
+      "id": "5cbdc3e6-d1b8-4c75-9d73-c6a5f4e9c303",
+      "user_id": "anonymous",
+      "filename": "78ffed270f30446594bd8d72fad71543.jpg",
+      "label": "Healthy",
+      "confidence": 99.83,
+      "is_infected": false,
+      "timestamp": "2026-05-06T14:52:56.119392"
+    },
+    {
+      "id": "18e5443e-1dbd-4cc9-9141-c3cb6c31653e",
+      "user_id": "anonymous",
+      "filename": "df6e259d25854cf8b060cb32fcb40cb7.jpg",
+      "label": "Healthy",
+      "confidence": 19.35,
+      "is_infected": false,
+      "timestamp": "2026-05-06T14:55:35.623096"
+    },
+    {
+      "id": "c3095e67-c39f-49c3-baa7-805c08ace308",
+      "user_id": "anonymous",
+      "filename": "6fa466f1ea984266b231e1d9dc23cec1.jpg",
+      "label": "Healthy",
+      "confidence": 0.0,
+      "is_infected": false,
+      "timestamp": "2026-05-06T15:26:33.103436"
+    },
+    {
+      "id": "b26d6d53-0a9d-4c6a-a10f-4a377cbba51d",
+      "user_id": "anonymous",
+      "filename": "8ea39eec23fc4c58ac7d680ddd0d7ce4.jpg",
+      "label": "Healthy",
+      "confidence": 93.7,
+      "is_infected": false,
+      "timestamp": "2026-05-06T15:28:03.365521"
+    },
+    {
+      "id": "38826a00-fa76-4483-a7e2-cd066acac6c2",
+      "user_id": "anonymous",
+      "filename": "4dc448557dcb4006bea0886ab15246dd.jpg",
+      "label": "Lumpy Skin Disease",
+      "confidence": 98.26,
+      "is_infected": true,
+      "timestamp": "2026-05-06T16:08:10.801069"
+    },
+    {
+      "id": "08befa40-b198-4bf1-96e6-861cd64ea6a4",
+      "user_id": "anonymous",
+      "filename": "5add894a7b4643b1b5c18ec13e95ae6c.jpg",
+      "label": "Healthy",
+      "confidence": 100.0,
+      "is_infected": false,
+      "timestamp": "2026-05-06T16:08:23.056205"
+    },
+    {
+      "id": "81e16ee9-cd1f-4191-958e-799648f40888",
+      "user_id": "anonymous",
+      "filename": "c8aa89827b2949f39eebe706e6b1fb9d.jpg",
+      "label": "Lumpy Skin Disease",
+      "confidence": 99.91,
+      "is_infected": true,
+      "timestamp": "2026-05-06T16:08:31.210259"
+    },
+    {
+      "id": "d7139540-12b8-44c4-9335-e93061f7afc0",
+      "user_id": "anonymous",
+      "filename": "4be0d0e6a60d4c4796371d95f07cc742.jpg",
+      "label": "Healthy",
+      "confidence": 100.0,
+      "is_infected": false,
+      "timestamp": "2026-05-06T16:08:38.500282"
+    },
+    {
+      "id": "bc755dd8-4d22-40ef-9c27-457daba9a361",
+      "user_id": "anonymous",
+      "filename": "928dea82e3fa40fa930b365dcfff1c64.jpg",
+      "label": "Lumpy Skin Disease",
+      "confidence": 86.4,
+      "is_infected": true,
+      "timestamp": "2026-05-06T16:08:48.194393"
+    },
+    {
+      "id": "4c2cc470-8bfa-466b-bb33-77fe17f8854e",
+      "user_id": "anonymous",
+      "filename": "c33b2c44150d4b35ba54af4a7c83aad3.jpg",
+      "label": "Healthy",
+      "confidence": 94.59,
+      "is_infected": false,
+      "timestamp": "2026-05-06T16:09:07.147254"
+    },
+    {
+      "id": "d10dcb9e-50be-4848-883c-fe1cabae2d01",
+      "user_id": "anonymous",
+      "filename": "b2f3b3eae01a40edb374b68f7d1f42e3.jpg",
+      "label": "Healthy",
+      "confidence": 80.65,
+      "is_infected": false,
+      "timestamp": "2026-05-06T16:09:30.464746"
+    },
+    {
+      "id": "e0ce730d-2f0b-4240-a32a-6798f946bf74",
+      "user_id": "anonymous",
+      "filename": "67ae9dde928c4164a91f809164a45640.jpg",
+      "label": "Lumpy Skin Disease",
+      "confidence": 96.18,
+      "is_infected": true,
+      "timestamp": "2026-05-06T16:09:47.539947"
+    },
+    {
+      "id": "9983faaa-59b6-46e2-847e-84ec6af9efe7",
+      "user_id": "anonymous",
+      "filename": "c678d164d55840c5b34ae8c80356e59e.jpg",
+      "label": "Lumpy Skin Disease",
+      "confidence": 93.7,
+      "is_infected": true,
+      "timestamp": "2026-05-06T16:10:00.007332"
+    },
+    {
+      "id": "31a9bce7-2fa2-46bc-adb0-f59fc0fbe482",
+      "user_id": "anonymous",
+      "filename": "8ee6cc4d758944b59ed39979f58303cf.jpg",
+      "label": "Lumpy Skin Disease",
+      "confidence": 98.26,
+      "is_infected": true,
+      "timestamp": "2026-05-06T16:10:12.389495"
+    },
+    {
+      "id": "c280aed6-b343-43d4-b8f4-517936aea654",
+      "user_id": "anonymous",
+      "filename": "323bc67da1a5482eabd54644baa4a9ce.jpg",
+      "label": "Healthy",
+      "confidence": 99.99,
+      "is_infected": false,
+      "timestamp": "2026-05-06T16:10:26.013980"
+    },
+    {
+      "id": "f380709e-977b-4458-924d-d94c3a253872",
+      "user_id": "anonymous",
+      "filename": "153e9748029d4fd98ac30a74c9d586f2.jpg",
+      "label": "Lumpy Skin Disease",
+      "confidence": 93.7,
+      "is_infected": true,
+      "timestamp": "2026-05-06T16:10:32.982720"
+    },
+    {
+      "id": "63612ed9-6cac-4896-a062-06ebfbee9c51",
+      "user_id": "anonymous",
+      "filename": "fcf3d1b87c124aa5849104431a8f2dca.jpg",
+      "label": "Lumpy Skin Disease",
+      "confidence": 98.26,
+      "is_infected": true,
+      "timestamp": "2026-05-06T16:10:40.451217"
+    },
+    {
+      "id": "b867abbd-1946-418b-9539-b163de83e795",
+      "user_id": "anonymous",
+      "filename": "e2a0283546e94242ae0fe583e3fee01a.jpg",
+      "label": "Lumpy Skin Disease",
+      "confidence": 99.91,
+      "is_infected": true,
+      "timestamp": "2026-05-06T16:10:49.778139"
+    },
+    {
+      "id": "5569a61b-d438-494b-95ca-06fc9469caa0",
+      "user_id": "anonymous",
+      "filename": "b65a3864f2bc4c14aa908feb512b54bd.jpg",
+      "label": "Lumpy Skin Disease",
+      "confidence": 99.91,
+      "is_infected": true,
+      "timestamp": "2026-05-06T16:11:03.795621"
+    },
+    {
+      "id": "1220a03e-b85a-4ca9-8246-870c0af870e1",
+      "user_id": "anonymous",
+      "filename": "4f7f50d41cde4c26b37b0bffa835aec0.jpg",
+      "label": "Healthy",
+      "confidence": 100.0,
+      "is_infected": false,
+      "timestamp": "2026-05-06T16:12:00.279995"
+    },
+    {
+      "id": "d795d77a-d306-41fc-8589-00b13874a9a9",
+      "user_id": "anonymous",
+      "filename": "882f9e211064464fa8ddc5b657709069.jpg",
+      "label": "Lumpy Skin Disease",
+      "confidence": 99.91,
+      "is_infected": true,
+      "timestamp": "2026-05-06T16:12:09.839910"
+    },
+    {
+      "id": "ee9f587b-81b7-4ff3-9e6d-b93bbb76bbbb",
+      "user_id": "anonymous",
+      "filename": "ad1cc8793fbd445d99263eedcaeb24de.jpg",
+      "label": "Lumpy Skin Disease",
+      "confidence": 99.91,
+      "is_infected": true,
+      "timestamp": "2026-05-06T16:17:55.521923"
+    },
+    {
+      "id": "1a4373aa-fa55-4578-91e1-6e72f97388c2",
+      "user_id": "anonymous",
+      "filename": "6d029ebff6ab4981b434987ce80e262c.jpg",
+      "label": "Healthy",
+      "confidence": 100.0,
+      "is_infected": false,
+      "timestamp": "2026-05-06T16:18:01.966845"
+    },
+    {
+      "id": "ac25a768-27d9-4bfd-8bad-b37ebe0d6952",
+      "user_id": "anonymous",
+      "filename": "9328c14ed9f842099cf7c4e88ade4dc9.jpg",
+      "label": "Lumpy Skin Disease",
+      "confidence": 86.4,
+      "is_infected": true,
+      "timestamp": "2026-05-06T16:18:09.333278"
+    },
+    {
+      "id": "d95976de-a55c-4d4c-867e-30e6218593af",
+      "user_id": "anonymous",
+      "filename": "2dc5e86c6ab24cf1add0806768599f3d.jpg",
+      "label": "Healthy",
+      "confidence": 99.51,
+      "is_infected": false,
+      "timestamp": "2026-05-06T16:58:06.745789"
+    },
+    {
+      "id": "7a97ed28-b4cf-4e62-b94c-e15cf96f98aa",
+      "user_id": "anonymous",
+      "filename": "21a652ba25a742aeadd52fc8bb72f475.jpg",
+      "label": "Healthy",
+      "confidence": 99.99,
+      "is_infected": false,
+      "timestamp": "2026-05-06T16:58:22.042771"
+    },
+    {
+      "id": "eeacce9e-8f38-4cc9-ad40-f2263751faaf",
+      "user_id": "anonymous",
+      "filename": "946bdc72dc024e0589df2dd3472de0f5.jpg",
+      "label": "Lumpy Skin Disease",
+      "confidence": 96.18,
+      "is_infected": true,
+      "timestamp": "2026-05-06T17:03:34.359779"
+    },
+    {
+      "id": "05bf87ac-4d07-47e2-8240-ad1bb05c014f",
+      "user_id": "anonymous",
+      "filename": "657ca2a006d44d2ca200bc05b2b00f18.jpg",
+      "label": "Healthy",
+      "confidence": 80.65,
+      "is_infected": false,
+      "timestamp": "2026-05-06T17:10:43.688238"
+    },
+    {
+      "id": "0138b30a-db73-4713-a237-cbf71ac9bead",
+      "user_id": "anonymous",
+      "filename": "a0e389be5d6141919225d1d5f9a5152e.jpg",
+      "label": "Healthy",
+      "confidence": 94.59,
+      "is_infected": false,
+      "timestamp": "2026-05-06T17:17:10.674323"
+    },
+    {
+      "id": "4838c0a7-545d-4a80-9802-f847a39945fe",
+      "user_id": "anonymous",
+      "filename": "a41fc7ebc45e40f583bf246c89c18507.jpg",
+      "label": "Lumpy Skin Disease",
+      "confidence": 98.26,
+      "is_infected": true,
+      "timestamp": "2026-05-06T17:18:12.233765"
+    },
+    {
+      "id": "61319e89-d978-4a49-93c7-9277174ef613",
+      "user_id": "anonymous",
+      "filename": "d8390afd5c8942d5b31fc82c504673d1.jpg",
+      "label": "Lumpy Skin Disease",
+      "confidence": 97.9,
+      "is_infected": true,
+      "timestamp": "2026-05-06T17:18:44.629637"
+    },
+    {
+      "id": "ffd36404-2941-45b7-a633-4bff0fd6ce93",
+      "user_id": "anonymous",
+      "filename": "a08d098b4cb1488ab7a38ddfd9cce846.jpg",
+      "label": "Lumpy Skin Disease",
+      "confidence": 63.97,
+      "is_infected": true,
+      "timestamp": "2026-05-06T17:20:03.254405"
+    },
+    {
+      "id": "5fad6467-abc6-4c8d-9e4b-d64d38a39d7c",
+      "user_id": "anonymous",
+      "filename": "0c71bccee5314cd9974d4498d171f17e.jpg",
+      "label": "Lumpy Skin Disease",
+      "confidence": 99.79,
+      "is_infected": true,
+      "timestamp": "2026-05-06T17:20:12.367416"
+    },
+    {
+      "id": "515748bd-6c97-41ea-a2de-e91a0204b0e6",
+      "user_id": "anonymous",
+      "filename": "6f85e97893164c719fdc6da5a5a441d1.jpg",
+      "label": "Lumpy Skin Disease",
+      "confidence": 96.29,
+      "is_infected": true,
+      "timestamp": "2026-05-06T17:20:32.707987"
+    },
+    {
+      "id": "bf0da88c-5883-4d67-9805-352245ddc17a",
+      "user_id": "anonymous",
+      "filename": "0b2b462a65524e9cb85bb366f923ab2a.jpg",
+      "label": "Healthy",
+      "confidence": 100.0,
+      "is_infected": false,
+      "timestamp": "2026-05-06T17:38:29.962398"
+    },
+    {
+      "id": "d86c8b3c-8579-4872-a9cf-fae2049c2c23",
+      "user_id": "f1d108bb-2f10-4f35-9267-42d28e05b658",
+      "filename": "d7ce8c820ed14bb0b9d308b10ab118c9.jpg",
+      "label": "Healthy",
+      "confidence": 75.59,
+      "is_infected": false,
+      "timestamp": "2026-05-06T17:59:46.783317"
+    },
+    {
+      "id": "12283606-839d-4f94-92f6-4f593171821b",
+      "user_id": "f1d108bb-2f10-4f35-9267-42d28e05b658",
+      "filename": "477cc95216bf454bb048e7e61a86fea5.jpg",
+      "label": "Lumpy Skin Disease",
+      "confidence": 50.02,
+      "is_infected": true,
+      "timestamp": "2026-05-06T17:59:56.172805"
+    },
+    {
+      "id": "3e02cc65-62e3-43be-a54e-872f19c34e01",
+      "user_id": "f1d108bb-2f10-4f35-9267-42d28e05b658",
+      "filename": "befa84d82a634fc0aa6cd1f1c49e9efa.jpg",
+      "label": "Lumpy Skin Disease",
+      "confidence": 64.51,
+      "is_infected": true,
+      "timestamp": "2026-05-06T18:00:11.823273"
+    },
+    {
+      "id": "908b2988-d99b-4b21-8cb3-e2fe87e9907d",
+      "user_id": "f1d108bb-2f10-4f35-9267-42d28e05b658",
+      "filename": "4daf9323ce7e4cefb7d9615b778011ee.jpg",
+      "label": "Lumpy Skin Disease",
+      "confidence": 55.4,
+      "is_infected": true,
+      "timestamp": "2026-05-06T18:02:12.249868"
+    },
+    {
+      "id": "fcd9e4de-be16-4d08-9005-6493f13f18e1",
+      "user_id": "f1d108bb-2f10-4f35-9267-42d28e05b658",
+      "filename": "1e85e74ab22d4f679f017d12477d5be0.jpg",
+      "label": "Healthy",
+      "confidence": 72.19,
+      "is_infected": false,
+      "timestamp": "2026-05-06T18:02:26.524826"
+    },
+    {
+      "id": "c5d81bf7-d312-46ab-8a80-26fa4a610269",
+      "user_id": "f1d108bb-2f10-4f35-9267-42d28e05b658",
+      "filename": "5508a3e48ea048e884e87c5324227401.jpg",
+      "label": "Healthy",
+      "confidence": 94.06,
+      "is_infected": false,
+      "timestamp": "2026-05-06T18:02:35.576496"
+    },
+    {
+      "id": "e32a11a3-07bd-4e96-acf6-07f09776b01a",
+      "user_id": "f1d108bb-2f10-4f35-9267-42d28e05b658",
+      "filename": "03f3b448bcb44bd5bc3c427552d9a585.jpg",
+      "label": "Healthy",
+      "confidence": 99.75,
+      "is_infected": false,
+      "timestamp": "2026-05-06T18:02:58.328446"
+    },
+    {
+      "id": "748ca31e-29cb-481d-a341-642492ee21cb",
+      "user_id": "f1d108bb-2f10-4f35-9267-42d28e05b658",
+      "filename": "98478738ef794dceac277aaa690d3abe.jpg",
+      "label": "Healthy",
+      "confidence": 93.58,
+      "is_infected": false,
+      "timestamp": "2026-05-06T18:03:10.855194"
+    },
+    {
+      "id": "b4801755-f83c-46f3-a185-ee08ada834f5",
+      "user_id": "f1d108bb-2f10-4f35-9267-42d28e05b658",
+      "filename": "45f0a05f55ab46ea9ccbd2e7c495bce1.jpg",
+      "label": "Healthy",
+      "confidence": 96.81,
+      "is_infected": false,
+      "timestamp": "2026-05-06T18:03:24.873845"
+    },
+    {
+      "id": "60c6957b-fd50-4fa5-b472-1931d77aed24",
+      "user_id": "f1d108bb-2f10-4f35-9267-42d28e05b658",
+      "filename": "8a17230aedbd4fba9d44917c10057a49.jpg",
+      "label": "Lumpy Skin Disease",
+      "confidence": 99.71,
+      "is_infected": true,
+      "timestamp": "2026-05-06T18:03:33.730817"
+    },
+    {
+      "id": "87a3562a-a43f-4968-80df-6b91f7035cf0",
+      "user_id": "f1d108bb-2f10-4f35-9267-42d28e05b658",
+      "filename": "67739ac1649f4e0e9c8d5b36c66e36c0.jpg",
+      "label": "Healthy",
+      "confidence": 100.0,
+      "is_infected": false,
+      "timestamp": "2026-05-06T18:13:34.464808"
+    },
+    {
+      "id": "69f265cf-4139-4552-b000-e37199505b9c",
+      "user_id": "f1d108bb-2f10-4f35-9267-42d28e05b658",
+      "filename": "14cf660b57334b079f2196afa5e73a3a.jpg",
+      "label": "Healthy",
+      "confidence": 100.0,
+      "is_infected": false,
+      "timestamp": "2026-05-06T18:13:44.919199"
+    },
+    {
+      "id": "9ee44a9d-28ae-4cc0-ae8a-d8e191cfd4d9",
+      "user_id": "f1d108bb-2f10-4f35-9267-42d28e05b658",
+      "filename": "8fe9513819f24f479b9447b523caba87.jpg",
+      "label": "Healthy",
+      "confidence": 100.0,
+      "is_infected": false,
+      "timestamp": "2026-05-07T03:39:57.383709"
+    },
+    {
+      "id": "212c0e7f-ef92-455f-8205-9dd87edcec8d",
+      "user_id": "f1d108bb-2f10-4f35-9267-42d28e05b658",
+      "filename": "64ffb77ba2224e91935846685642b028.jpg",
+      "label": "Lumpy Skin Disease",
+      "confidence": 93.7,
+      "is_infected": true,
+      "timestamp": "2026-05-07T03:40:06.842884"
+    },
+    {
+      "id": "0ecb268f-7a72-4c6a-be7f-2e60fce683af",
+      "user_id": "anonymous",
+      "filename": "4ea26119c2c540188a9db10a32095024.jpg",
+      "label": "Lumpy Skin Disease",
+      "confidence": 99.91,
+      "is_infected": true,
+      "timestamp": "2026-05-07T04:40:14.879827"
+    },
+    {
+      "id": "6f767e24-9b81-44de-a9e7-73d7edde3b16",
+      "user_id": "anonymous",
+      "filename": "9af88195a60e4578bd6844a1388d6994.jpg",
+      "label": "Healthy",
+      "confidence": 100.0,
+      "is_infected": false,
+      "timestamp": "2026-05-07T04:40:29.368443"
+    },
+    {
+      "id": "dbee133e-3087-4fc5-94f7-9957b6648ccb",
+      "user_id": "anonymous",
+      "filename": "ce752353350f4d97b6cd80f6bb74d1c5.jpg",
+      "label": "Lumpy Skin Disease",
+      "confidence": 96.18,
+      "is_infected": true,
+      "timestamp": "2026-05-07T04:40:40.348316"
+    },
+    {
+      "id": "f3971f78-1d55-40c1-8515-918b6de2e4dc",
+      "user_id": "anonymous",
+      "filename": "a03dd0de5123432e9737a62b39920807.jpg",
+      "label": "Healthy",
+      "confidence": 100.0,
+      "is_infected": false,
+      "timestamp": "2026-05-07T04:57:36.110005"
+    },
+    {
+      "id": "9127fda7-969d-4037-96d6-c1d758d1f3e2",
+      "user_id": "anonymous",
+      "filename": "fb2da5c4a6fa423d935a01d1768042ad.jpg",
+      "label": "Lumpy Skin Disease",
+      "confidence": 98.26,
+      "is_infected": true,
+      "timestamp": "2026-05-07T04:58:12.670565"
+    },
+    {
+      "id": "2cbdd646-dabb-4a14-9549-aa2df05a0bcc",
+      "user_id": "anonymous",
+      "filename": "6ce754599720474ba1ba8ae248012bea.jpg",
+      "label": "Lumpy Skin Disease",
+      "confidence": 93.7,
+      "is_infected": true,
+      "timestamp": "2026-05-07T05:00:41.085062"
+    }
+  ]
+}
